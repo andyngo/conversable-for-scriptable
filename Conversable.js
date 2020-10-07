@@ -93,7 +93,7 @@ function CreateContact(contact, row) {
       icon = "icons/sms.png";
       break;
     case "call":
-      serviceUrl = `phone://${contact.phone}`;
+      serviceUrl = `tel://${contact.phone}`;
       icon = "icons/phone.png";
       break;
     case "facetime":
