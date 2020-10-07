@@ -1,5 +1,7 @@
 # Conversable for Scriptable
 
+![Cover image for Conversable](https://github.com/andyngo/conversable-for-scriptable/blob/master/conversable.png)
+
 Note: This script requires Scriptable version 1.5.1 as it relies on a few newly added APIs such as `.addStack()` and `.url()`.
 
 ---
