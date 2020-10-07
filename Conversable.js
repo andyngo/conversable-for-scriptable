@@ -42,14 +42,14 @@ let contacts = contacts_list.slice(0, 4);
 // the widget will be refreshed periodically and your contacts will
 // be shuffled.
 
-function getImg(image) {
+async function getImg(image) {
   let fm = FileManager.iCloud();
   let dir = fm.documentsDirectory();
   let path = fm.joinPath(dir + "/Conversable", image);
+  let download = await fm.downloadFileFromiCloud(path);
+  let isDownloaded = await fm.isFileDownloaded(path);
 
   if (fm.fileExists(path)) {
-    let download = fm.downloadFileFromiCloud(path);
-    let isDownloaded = fm.isFileDownloaded(path);
     return fm.readImage(path);
   } else {
     console.log("Error: File does not exist.");
@@ -80,7 +80,7 @@ let wrapperStack = w.addStack();
 wrapperStack.layoutVertically();
 wrapperStack.centerAlignContent();
 
-function CreateContact(contact, row) {
+async function CreateContact(contact, row) {
   let contactStack = row.addStack();
   contactStack.layoutVertically();
 
@@ -113,7 +113,7 @@ function CreateContact(contact, row) {
   contactStack.url = serviceUrl;
 
   // contact photo
-  let imgPath = getImg(contact.photo);
+  let imgPath = await getImg(contact.photo);
 
   let photoStack = contactStack.addStack();
   photoStack.centerAlignContent();
@@ -136,7 +136,7 @@ function CreateContact(contact, row) {
 
   nameStack.addSpacer();
 
-  let iconPath = getImg(icon);
+  let iconPath = await getImg(icon);
   let appIcon = nameStack.addImage(iconPath);
   appIcon.imageSize = new Size(12, 12);
 
