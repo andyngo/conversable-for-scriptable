@@ -108,6 +108,10 @@ async function CreateContact(contact, row) {
       serviceUrl = `whatsapp://send?text=&phone=${contact.phone}`;
       icon = "icons/whatsapp.png";
       break;
+    case "twitter":
+      serviceUrl = `twitter://messages/compose?recipient_id=${contact.twitter_id}`;
+      icon = "icons/twitter.png";
+      break;
   }
 
   contactStack.url = serviceUrl;
