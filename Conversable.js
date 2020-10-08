@@ -70,6 +70,7 @@ titleStack.addSpacer();
 
 let title = titleStack.addText("Start a conversation with");
 title.font = Font.boldRoundedSystemFont(16);
+title.textColor = Color.white();
 title.centerAlignText();
 
 titleStack.addSpacer();
@@ -157,6 +158,7 @@ async function CreateContact(contact, row) {
 
   let name = nameStack.addText(contact.name);
   name.font = Font.mediumSystemFont(12);
+  name.textColor = Color.white();
 
   nameStack.addSpacer();
   // end of contact name
