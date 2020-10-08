@@ -58,7 +58,7 @@ async function getImg(image) {
 
 let w = new ListWidget();
 // set the background color of the widget
-w.backgroundColor = new Color("#222", 1);
+w.backgroundColor = new Color("#151515", 1);
 w.useDefaultPadding();
 
 w.addSpacer();
