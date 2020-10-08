@@ -116,6 +116,10 @@ async function CreateContact(contact, row) {
       serviceUrl = `twitter://messages/compose?recipient_id=${contact.twitter_id}`;
       icon = "icons/twitter.png";
       break;
+    case "telegram":
+      serviceUrl = `tg://resolve?domain=${contact.telegram_username}`;
+      icon = "icons/telegram.png";
+      break;
   }
 
   contactStack.url = serviceUrl;
