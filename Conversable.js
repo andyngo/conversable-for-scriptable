@@ -123,6 +123,7 @@ async function CreateContact(contact, row) {
   let photo_size = 64;
   let photo = photoStack.addImage(imgPath);
   photo.imageSize = new Size(photo_size, photo_size);
+  photo.applyFillingContentMode();
   photo.cornerRadius = photo_size / 2;
 
   photoStack.addSpacer();
