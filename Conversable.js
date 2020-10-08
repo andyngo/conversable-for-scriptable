@@ -96,6 +96,10 @@ async function CreateContact(contact, row) {
       serviceUrl = `tel://${contact.phone}`;
       icon = "icons/phone.png";
       break;
+    case "mail":
+      serviceUrl = `mailto://${contact.email}`;
+      icon = "icons/mail.png";
+      break;
     case "facetime":
       serviceUrl = `facetime://${contact.phone}`;
       icon = "icons/facetime.png";
