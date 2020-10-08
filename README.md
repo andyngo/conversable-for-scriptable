@@ -40,7 +40,7 @@ iCloud Drive/
 2. Launch Scriptable and make sure that Conversable is listed in the Scripts view.
 3. Go ahead and run it and you should see a preview of the Medium-sized widget if everything is working correctly.
 
-4. To customize the contacts, open up Conversable.js in the Scriptable editor and modify the `contacts_list` array. For example, change:
+4. To customize the contacts, open Conversable.js in the Scriptable editor and modify the `contacts_list` array. For example, change:
 
 ```
 // default config
@@ -69,7 +69,7 @@ const contact_list = [
 ]
 ```
 
-5. Repeat the steps for up to 4 contacts. Conversable currently supports only showing up to 4 contacts within a row. Feel free to tweak the code if you need to add more contacts to a row.
+5. Repeat the steps for up to 4 contacts. Conversable currently supports showing up to 4 contacts within a row. Feel free to tweak the code if you need to add more contacts to a row.
 
 6. Once everything is configured, run the script and verify that everything is working correctly.
 
@@ -111,12 +111,11 @@ I've also included several more icons in the `/icons` folder that might be usefu
 
 - Sometimes the images would fail to download. In the event where that happens, check the `Conversable` folder in your iCloud Drive to make sure that the images are uploaded correctly. If you see 'Waiting...' on your files, try toggling Airplane Mode on and off to restart the upload.
 - Right now the widget only supports the Medium widget size. I'll look at ways to adapt this for the Small and Large sizes.
-- Dark Mode only, for now. You can always customize the text and background yourself if you want to make this work for Light Mode.
 
 ---
 
 ## About this project
 
-This script is authored by [@andyngo](https://twitter.com/andyngo) (me) as a fun little side project to try out the scripting capibilities of Scriptable. Turns out you can do quite a lot with Scriptable so I plan to make a few more delightful widgets likethis.
+This script is authored by [@andyngo](https://twitter.com/andyngo) (me) as a fun little side project to try out the scripting capabilities of Scriptable. It turns out that you can do a lot with Scriptable and I plan to make a few more delightful widgets like this.
 
-If you like this project, consider viewing https://extendedicons.com for more home screen customization options or follow me on [Twitter](https://twitter.com/andyngo).
+If you like this project, consider viewing https://extendedicons.com for more home screen customization options or follow me on [Twitter](https://twitter.com/andyngo) for updates.
