@@ -73,40 +73,41 @@ async function getImg(image) {
 }
 
 async function CreateAction(contact) {
+  let { phone, email, twitter_id, telegram_username } = contact;
   let serviceUrl;
   let icon;
 
   switch (contact.type) {
     case "sms":
-      serviceUrl = `sms://${contact.phone}`;
+      serviceUrl = `sms://${phone}`;
       icon = "icons/sms.png";
       break;
     case "call":
-      serviceUrl = `tel://${contact.phone}`;
+      serviceUrl = `tel://${phone}`;
       icon = "icons/phone.png";
       break;
     case "mail":
-      serviceUrl = `mailto://${contact.email}`;
+      serviceUrl = `mailto://${email}`;
       icon = "icons/mail.png";
       break;
     case "facetime":
-      serviceUrl = `facetime://${contact.phone}`;
+      serviceUrl = `facetime://${phone}`;
       icon = "icons/facetime.png";
       break;
     case "facetime-audio":
-      serviceUrl = `facetime-audio://${contact.phone}`;
+      serviceUrl = `facetime-audio://${phone}`;
       icon = "icons/facetime.png";
       break;
     case "whatsapp":
-      serviceUrl = `whatsapp://send?text=&phone=${contact.phone}`;
+      serviceUrl = `whatsapp://send?text=&phone=${phone}`;
       icon = "icons/whatsapp.png";
       break;
     case "twitter":
-      serviceUrl = `twitter://messages/compose?recipient_id=${contact.twitter_id}`;
+      serviceUrl = `twitter://messages/compose?recipient_id=${twitter_id}`;
       icon = "icons/twitter.png";
       break;
     case "telegram":
-      serviceUrl = `tg://resolve?domain=${contact.telegram_username}`;
+      serviceUrl = `tg://resolve?domain=${telegram_username}`;
       icon = "icons/telegram.png";
       break;
   }
