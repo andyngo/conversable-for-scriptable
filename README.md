@@ -1,14 +1,17 @@
 # Conversable for Scriptable
 
 ![Cover image for Conversable](https://github.com/andyngo/conversable-for-scriptable/blob/main/conversable.png)
+Notes:
 
-Note: This script requires Scriptable version 1.5.1 as it relies on a few newly added APIs such as `.addStack()` and `.url()`.
+1. This script requires Scriptable version 1.5.1 as it relies on a few newly added APIs such as `.addStack()` and `.url()`.
+
+2. An alternate version of this widget can be found [here](https://github.com/andyngo/conversable-plus-for-scriptable). The alt version (Conversable+) supports showing a list of actions when you tap on a contact. Consider using the alt version if you prefer having multiple actions per contact.
 
 ---
 
 ## What is this?
 
-Conversable is a simple chat widget for Scriptable. With Conversable, you can quickly\*:
+Conversable is a simple contacts widget for Scriptable. With Conversable, you can quickly\*:
 
 1. Open an iMessage conversation for a contact
 2. Start a Facetime call with a contact
@@ -38,7 +41,8 @@ iCloud Drive/
 ```
 
 2. Launch Scriptable and make sure that Conversable is listed in the Scripts view.
-3. Go ahead and run it and you should see a preview of the Medium-sized widget if everything is working correctly.
+
+3. Run the script and you should see a preview of the Medium-sized widget with placeholder contacts if everything is set up correctly.
 
 4. To customize the contacts, open Conversable.js in the Scriptable editor and modify the `contacts_list` array. For example, change:
 
@@ -51,7 +55,7 @@ const contact_list = [
     type: "sms",
     photo: "1.png"
   },
-  // the rest of the objects go here
+  // the rest of the array goes here
 ]
 ```
 
@@ -65,23 +69,66 @@ const contact_list = [
     type: "sms", // the type of communication method that you prefer. see supported services below.
     photo: "john.png" // the photo of the contact. the image file goes inside the Conversable folder where 1.png, 2.png, etc resides.
   },
-  // the rest of the objects go here
+  // the rest of the array goes here
 ]
 ```
 
-5. Repeat the steps for up to 4 contacts. Conversable currently supports showing up to 4 contacts within a row. Feel free to tweak the code if you need to add more contacts to a row.
+5. Repeat the steps above for up to 4 contacts. Conversable currently supports showing up to 4 contacts within a row. Feel free to tweak the code if you need to add more contacts to a row.
 
-6. Once everything is configured, run the script and verify that everything is working correctly.
+6. Once you've added your own contacts, run the script and verify that everything is working correctly.
 
-7. Go back to your home screen and add a Medium Scriptable widget.
+7. Return to your home screen and add a Medium Scriptable widget.
 
 8. Edit the Scriptable widget and choose Conversable as the Script. Next, set "When Interacting" to "Run Script" and you should be all set and ready to go.
 
 ---
 
+## Settings
+
+Conversable supports several simple configurations as of version 1.1.
+
+```
+const SETTINGS = {
+  BG_COLOR: "#151515",
+  BG_IMAGE: {
+    SHOW_BG: false,
+    IMAGE_PATH: "bg.png",
+  },
+  BG_OVERLAY: {
+    SHOW_OVERLAY: false,
+    OVERLAY_COLOR: "#111111",
+    OPACITY: 0.5,
+  },
+  PADDING: 8,
+  TITLE_FONT_SIZE: 18,
+  PHOTO_SIZE: 60,
+  NAME_FONT_SIZE: 11,
+  RANDOMIZE_CONTACTS: false,
+  NO_OF_CONTACTS_TO_SHOW: 4,
+};
+```
+
+| Settings                 | Types                           |
+| ------------------------ | ------------------------------- |
+| BG_COLOR                 | Hex Value `string`              |
+| BG_IMAGE.SHOW_BG         | Boolean `true` or `false`       |
+| BG_IMAGE.IMAGE_PATH      | BG image filename/path `string` |
+| BG_OVERLAY.SHOW_OVERLAY  | Boolean `true` or `false`       |
+| BG_OVERLAY.OVERLAY_COLOR | Hex Value `string`              |
+| BG_OVERLAY.OPACITY       | Any value from 0 to 1 `float`   |
+| PADDING                  | 8 (Default) `number`            |
+| TITLE_FONT_SIZE          | 18 (Default) `number`           |
+| PHOTO_SIZE               | 60 (Default) `number`           |
+| RANDOMIZE_CONTACTS       | Boolean `true` or `false`       |
+| NO_OF_CONTACTS_TO_SHOW   | 4 (Default) `number`            |
+
+Feel free to tweak these settings as you see fit.
+
+---
+
 ## Supported Services (Apps)
 
-| Services (Apps) | type             | accepts           |
+| Services (Apps) | Type             | Accepts           |
 | --------------- | ---------------- | ----------------- |
 | iMessage/SMS    | "sms"            | phone             |
 | Mail            | "mail"           | mail              |
@@ -97,8 +144,8 @@ Twitter example:
 ```
 {
   name: "Andy",
-  twitter_id: "11009532", // there are tools out there that allow you to get this
   type: "twitter",
+  twitter_id: "11009532", // there are tools out there that allow you to get this
   photo: "1.png"
 }
 ```
@@ -109,13 +156,14 @@ I've also included several more icons in the `/icons` folder that might be usefu
 
 ## Known Issues
 
-- Sometimes the images would fail to download. In the event where that happens, check the `Conversable` folder in your iCloud Drive to make sure that the images are uploaded correctly. If you see 'Waiting...' on your files, try toggling Airplane Mode on and off to restart the upload.
-- Right now the widget only supports the Medium widget size. I'll look at ways to adapt this for the Small and Large sizes.
+- Sometimes the images would fail to download. In the event where that happens, check the `Conversable` folder in your iCloud Drive and make sure that all the images are uploaded correctly. If your files show 'Waiting...', try toggling Airplane Mode on and off to restart the upload.
+
+- Right now the widget only supports the Medium widget size. I'll consider adapting this to support the Small and Large sizes if I get enough requests for it.
 
 ---
 
 ## About this project
 
-This script is authored by [@andyngo](https://twitter.com/andyngo) (me) as a fun little side project to try out the scripting capabilities of Scriptable. It turns out that you can do a lot with Scriptable and I plan to make a few more delightful widgets like this.
+This script is authored by [@andyngo](https://twitter.com/andyngo) (me) as a fun little side project to try out the scripting capabilities of Scriptable.
 
-If you like this project, consider viewing https://extendedicons.com for more home screen customization options or follow me on [Twitter](https://twitter.com/andyngo) for updates.
+If you like this project, consider viewing https://extendedicons.com for custom-made icons for your Shortcuts, or [buy me a coffee](https://www.buymeacoffee.com/andyngo) You can also follow me on [Twitter](https://twitter.com/andyngo) for updates.
