@@ -160,6 +160,7 @@ async function CreateContact(contact, row) {
 
 async function CreateWidget(contacts) {
   let { BG_COLOR, BG_IMAGE, BG_OVERLAY, PADDING, TITLE_FONT_SIZE } = SETTINGS;
+
   let w = new ListWidget();
   w.backgroundColor = new Color(BG_COLOR);
   w.setPadding(PADDING, PADDING, PADDING, PADDING);
