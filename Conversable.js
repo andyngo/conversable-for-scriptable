@@ -146,7 +146,6 @@ async function CreateContact(contact, row) {
 
   let iconPath = await getImg(icon);
   let appIcon = nameStack.addImage(iconPath);
-  console.log(appIcon);
   appIcon.imageSize = new Size(12, 12);
 
   nameStack.addSpacer(4);
