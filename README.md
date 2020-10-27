@@ -109,19 +109,20 @@ const SETTINGS = {
 };
 ```
 
-| Settings                 | Types                           |
-| ------------------------ | ------------------------------- |
-| BG_COLOR                 | Hex Value `string`              |
-| BG_IMAGE.SHOW_BG         | Boolean `true` or `false`       |
-| BG_IMAGE.IMAGE_PATH      | BG image filename/path `string` |
-| BG_OVERLAY.SHOW_OVERLAY  | Boolean `true` or `false`       |
-| BG_OVERLAY.OVERLAY_COLOR | Hex Value `string`              |
-| BG_OVERLAY.OPACITY       | Any value from 0 to 1 `float`   |
-| PADDING                  | 8 (Default) `number`            |
-| TITLE_FONT_SIZE          | 18 (Default) `number`           |
-| PHOTO_SIZE               | 60 (Default) `number`           |
-| RANDOMIZE_CONTACTS       | Boolean `true` or `false`       |
-| NO_OF_CONTACTS_TO_SHOW   | 4 (Default) `number`            |
+| Settings                   | Types                           |
+| -------------------------- | ------------------------------- |
+| `BG_COLOR`                 | Hex Value `string`              |
+| `BG_IMAGE.SHOW_BG`         | Boolean `true` or `false`       |
+| `BG_IMAGE.IMAGE_PATH`      | BG image filename/path `string` |
+| `BG_OVERLAY.SHOW_OVERLAY`  | Boolean `true` or `false`       |
+| `BG_OVERLAY.OVERLAY_COLOR` | Hex Value `string`              |
+| `BG_OVERLAY.OPACITY`       | Any value from 0 to 1 `float`   |
+| `PADDING`                  | 8 (Default) `number`            |
+| `TITLE_FONT_SIZE`          | 18 (Default) `number`           |
+| `PHOTO_SIZE`               | 60 (Default) `number`           |
+| `NAME_FONT_SIZE`           | 11 (Default) `number`           |
+| `RANDOMIZE_CONTACTS`       | Boolean `true` or `false`       |
+| `NO_OF_CONTACTS_TO_SHOW`   | 4 (Default) `number`            |
 
 Feel free to tweak these settings as you see fit.
 
