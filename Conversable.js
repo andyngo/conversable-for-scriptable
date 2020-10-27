@@ -1,11 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: grin-squint;
-
-// Configs
-// Modify the array below and your own contacts
-// There are 5 types of services that you can use at the moment:
-// "sms", "facetime", "facetime-audio", "call", "whatsapp"
+// initialize contacts
 const contacts_list = [
   {
     name: "Placeholder",
@@ -32,16 +28,36 @@ const contacts_list = [
     photo: "4.png",
   },
 ];
-// end of config
 
-// show only the first 4 contacts
-let contacts = contacts_list.slice(0, 4);
+const SETTINGS = {
+  BG_COLOR: "#151515",
+  BG_IMAGE: {
+    SHOW_BG: false,
+    IMAGE_PATH: "bg.png",
+  },
+  BG_OVERLAY: {
+    SHOW_OVERLAY: false,
+    OVERLAY_COLOR: "#111111",
+    OPACITY: 0.5,
+  },
+  PADDING: 8,
+  TITLE_FONT_SIZE: 18,
+  PHOTO_SIZE: 60,
+  NAME_FONT_SIZE: 11,
+  RANDOMIZE_CONTACTS: false,
+  NO_OF_CONTACTS_TO_SHOW: 4,
+};
 
-// If you want shuffle your contacts you can do something like this:
-// let shuffle = [...contacts].sort(() => 0.5 - Math.random()).slice(0, 4);
-// the widget will be refreshed periodically and your contacts will
-// be shuffled.
+// check if RANDOMIZE_CONTACTS is enabled. If it's set to `true`, randomize the contacts_list array.
+if (SETTINGS.RANDOMIZE_CONTACTS == true) {
+  contacts = [...contacts_list]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, SETTINGS.NO_OF_CONTACTS_TO_SHOW);
+} else {
+  contacts = [...contacts_list].slice(0, SETTINGS.NO_OF_CONTACTS_TO_SHOW);
+}
 
+// A function to download images
 async function getImg(image) {
   let fm = FileManager.iCloud();
   let dir = fm.documentsDirectory();
@@ -56,35 +72,7 @@ async function getImg(image) {
   }
 }
 
-let w = new ListWidget();
-// set the background color of the widget
-w.backgroundColor = new Color("#151515", 1);
-w.useDefaultPadding();
-
-w.addSpacer();
-
-let titleStack = w.addStack();
-titleStack.centerAlignContent();
-
-titleStack.addSpacer();
-
-let title = titleStack.addText("Start a conversation with");
-title.font = Font.boldRoundedSystemFont(16);
-title.textColor = Color.white();
-title.centerAlignText();
-
-titleStack.addSpacer();
-
-w.addSpacer();
-
-let wrapperStack = w.addStack();
-wrapperStack.layoutVertically();
-wrapperStack.centerAlignContent();
-
-async function CreateContact(contact, row) {
-  let contactStack = row.addStack();
-  contactStack.layoutVertically();
-
+async function CreateAction(contact) {
   let serviceUrl;
   let icon;
 
@@ -123,60 +111,111 @@ async function CreateContact(contact, row) {
       break;
   }
 
+  return { serviceUrl, icon };
+}
+
+// A function to create contacts (to be displayed in the widget).
+async function CreateContact(contact, row) {
+  let { PHOTO_SIZE, NAME_FONT_SIZE } = SETTINGS;
+
+  let { photo, name } = contact;
+  let { serviceUrl, icon } = await CreateAction(contact);
+
+  let contactStack = row.addStack();
+  contactStack.layoutVertically();
+
   contactStack.url = serviceUrl;
 
-  // contact photo
-  let imgPath = await getImg(contact.photo);
-
   let photoStack = contactStack.addStack();
-  photoStack.centerAlignContent();
 
   photoStack.addSpacer();
 
-  let photo_size = 64;
-  let photo = photoStack.addImage(imgPath);
-  photo.imageSize = new Size(photo_size, photo_size);
-  photo.applyFillingContentMode();
-  photo.cornerRadius = photo_size / 2;
+  let img = await getImg(photo);
+  let contactPhoto = photoStack.addImage(img);
+  contactPhoto.imageSize = new Size(PHOTO_SIZE, PHOTO_SIZE);
+  contactPhoto.cornerRadius = PHOTO_SIZE / 2;
+  contactPhoto.applyFillingContentMode();
 
   photoStack.addSpacer();
-  // end of contact photo
 
   contactStack.addSpacer(4);
 
-  // contact name
   let nameStack = contactStack.addStack();
-  nameStack.centerAlignContent();
 
   nameStack.addSpacer();
 
   let iconPath = await getImg(icon);
   let appIcon = nameStack.addImage(iconPath);
+  console.log(appIcon);
   appIcon.imageSize = new Size(12, 12);
 
   nameStack.addSpacer(4);
 
-  let name = nameStack.addText(contact.name);
-  name.font = Font.mediumSystemFont(12);
-  name.textColor = Color.white();
+  let contactName = nameStack.addText(name);
+  contactName.font = Font.mediumSystemFont(NAME_FONT_SIZE);
+  contactName.lineLimit = 1;
 
   nameStack.addSpacer();
-  // end of contact name
 }
 
-// row of contacts
-wrapperStack.addSpacer();
+async function CreateWidget(contacts) {
+  let { BG_COLOR, BG_IMAGE, BG_OVERLAY, PADDING, TITLE_FONT_SIZE } = SETTINGS;
+  let w = new ListWidget();
+  w.backgroundColor = new Color(BG_COLOR);
+  w.setPadding(PADDING, PADDING, PADDING, PADDING);
 
-let rowStack = wrapperStack.addStack();
-rowStack.centerAlignContent();
+  // Show background image if SHOW_BG is set to `true`.
+  if (BG_IMAGE.SHOW_BG == true) {
+    let bg = await getImg(BG_IMAGE.IMAGE_PATH);
+    w.backgroundImage = bg;
+  }
 
-for (contact of contacts) {
-  CreateContact(contact, rowStack);
+  // Show overlay if SHOW_OVERLAY is set to `true`. For light background images, it is recommended that you turn overlay on so that the contact names and text remain legible.
+  if (BG_OVERLAY.SHOW_OVERLAY == true) {
+    let overlayColor = new Color(
+      BG_OVERLAY.OVERLAY_COLOR,
+      BG_OVERLAY.OPACITY || 0.3
+    );
+    let gradient = new LinearGradient();
+    gradient.colors = [overlayColor, overlayColor];
+    gradient.locations = [0, 1];
+    w.backgroundGradient = gradient;
+  }
+
+  w.addSpacer();
+
+  let containerStack = w.addStack();
+  containerStack.layoutVertically();
+
+  let titleStack = containerStack.addStack();
+
+  titleStack.addSpacer();
+
+  let title = titleStack.addText("Start a conversation with");
+  title.font = Font.boldRoundedSystemFont(TITLE_FONT_SIZE);
+
+  titleStack.addSpacer();
+
+  containerStack.addSpacer(16);
+
+  let contactRowStack = containerStack.addStack();
+  contactRowStack.centerAlignContent();
+
+  contactRowStack.addSpacer();
+
+  contacts.map((contact) => {
+    CreateContact(contact, contactRowStack);
+  });
+
+  contactRowStack.addSpacer();
+
+  w.addSpacer();
+
+  Script.setWidget(w);
+
+  return w;
 }
 
-wrapperStack.addSpacer();
-// end of row of contacts
-
-// present medium sized widget for preview when debugging
-// comment w.presentMedium() out if you don't need any preview
+let w = await CreateWidget(contacts);
 w.presentMedium();
+Script.complete();
