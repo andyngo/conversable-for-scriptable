@@ -1,6 +1,7 @@
 # Conversable for Scriptable
 
 ![Cover image for Conversable](https://github.com/andyngo/conversable-for-scriptable/blob/main/conversable.png)
+
 Notes:
 
 1. This script requires Scriptable version 1.5.1 as it relies on a few newly added APIs such as `.addStack()` and `.url()`.
@@ -166,4 +167,4 @@ I've also included several more icons in the `/icons` folder that might be usefu
 
 This script is authored by [@andyngo](https://twitter.com/andyngo) (me) as a fun little side project to try out the scripting capabilities of Scriptable.
 
-If you like this project, consider viewing https://extendedicons.com for custom-made icons for your Shortcuts, or [buy me a coffee](https://www.buymeacoffee.com/andyngo) You can also follow me on [Twitter](https://twitter.com/andyngo) for updates.
+If you like this project, consider viewing https://extendedicons.com for custom-made icons for your Shortcuts, or [buy me a coffee](https://www.buymeacoffee.com/andyngo). You can also follow me on [Twitter](https://twitter.com/andyngo) for updates.
