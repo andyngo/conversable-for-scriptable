@@ -156,9 +156,25 @@ I've also included several more icons in the `/icons` folder that might be usefu
 
 ---
 
-## Known Issues
+## Known Issues & Troubleshooting
 
-- Sometimes the images would fail to download. In the event where that happens, check the `Conversable` folder in your iCloud Drive and make sure that all the images are uploaded correctly. If your files show 'Waiting...', try toggling Airplane Mode on and off to restart the upload.
+### My icons and contact names are missing.
+
+- Sometimes the images would fail to download and would cause the entire row of icon and contact name to not show up. You can try to troubleshoot this issue by:
+
+1. Checking the `Conversable` folder in your iCloud Drive and making sure that all the images are uploaded correctly. If your files show 'Waiting...', try toggling Airplane Mode on and off to restart the upload.
+
+2. Renaming the `Conversable` to something else ie: `Conversable1` or something else. Remember to also change the folder path in `Conversable.js` to reflect the newly renamed folder:
+
+```
+async function getImg(image) {
+  let folder = "/Conversable1"
+  // the rest of the code
+```
+
+3. If none of the steps above worked for you, please reach out on [Twitter](https://twitter.com/andyngo) and I'll see what I can do.
+
+### The widget is not rendering correctly in the Small/Large size.
 
 - Right now the widget only supports the Medium widget size. I'll consider adapting this to support the Small and Large sizes if I get enough requests for it.
 
