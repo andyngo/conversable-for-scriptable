@@ -59,9 +59,11 @@ if (SETTINGS.RANDOMIZE_CONTACTS == true) {
 
 // A function to download images
 async function getImg(image) {
+  let folderName = "Conversable";
+
   let fm = FileManager.iCloud();
   let dir = fm.documentsDirectory();
-  let path = fm.joinPath(dir + "/Conversable", image);
+  let path = fm.joinPath(dir + "/" + folderName, image);
   let download = await fm.downloadFileFromiCloud(path);
   let isDownloaded = await fm.isFileDownloaded(path);
 
