@@ -30,7 +30,8 @@ const contacts_list = [
 ];
 
 const SETTINGS = {
-  BG_COLOR: "#151515",
+  BG_COLOR_LIGHT: "#FEFEFE",
+  BG_COLOR_DARK: "#151515",
   BG_IMAGE: {
     SHOW_BG: false,
     IMAGE_PATH: "bg.png",
@@ -161,10 +162,10 @@ async function CreateContact(contact, row) {
 }
 
 async function CreateWidget(contacts) {
-  let { BG_COLOR, BG_IMAGE, BG_OVERLAY, PADDING, TITLE_FONT_SIZE } = SETTINGS;
+  let { BG_COLOR_LIGHT, BG_COLOR_DARK, BG_IMAGE, BG_OVERLAY, PADDING, TITLE_FONT_SIZE } = SETTINGS;
 
   let w = new ListWidget();
-  w.backgroundColor = new Color(BG_COLOR);
+  w.backgroundColor = Color.dynamic(new Color(BG_COLOR_LIGHT), new Color(BG_COLOR_DARK));
   w.setPadding(PADDING, PADDING, PADDING, PADDING);
 
   // Show background image if SHOW_BG is set to `true`.
